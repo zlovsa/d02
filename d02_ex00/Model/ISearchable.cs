@@ -8,5 +8,7 @@ namespace d02_ex00
 {
 	interface ISearchable
 	{
+		public string Title { get; set; }
+		public string ToString();
 	}
 }
