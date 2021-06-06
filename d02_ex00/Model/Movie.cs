@@ -14,16 +14,25 @@ namespace d02_ex00
 		[JsonPropertyName("mpaa_rating")]
 		public string Rating { get; set; }
 		[JsonPropertyName("critics_pick")]
-		public bool IsCriticsPick { get; set; }
+		public int intIsCriticsPick { get; set; }
+		public bool IsCriticsPick => intIsCriticsPick == 1;
 		[JsonPropertyName("summary_short")]
 		public string SummaryShort { get; set; }
-		[JsonPropertyName("url")]
-		public string Url { get; set; }
+
+		public class Link
+		{
+			[JsonPropertyName("url")]
+			public string Url { get; set; }
+		}
+		[JsonPropertyName("link")]
+		public Link link { get; set; }
+
+		public string Url => link.Url;
 
 		public override string ToString() {
-			return $"- {Title}" + (IsCriticsPick ? "[NYT critic’s pick]" : "") + Environment.NewLine
+			return $"{Title.ToUpper()}{(IsCriticsPick ? " [NYT critic’s pick]" : "")}{Environment.NewLine}"
 				+ $"{SummaryShort}{Environment.NewLine}"
-				+ $"{Url}{Environment.NewLine}";
+				+ $"{Url}";
 ;		}
 	}
 }

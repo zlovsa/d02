@@ -10,17 +10,10 @@ namespace d02_ex01
 	class Configuration
 	{
 		public Configuration(List<IConfigurationSource> sources) {
-			sources.Sort(delegate (IConfigurationSource x, IConfigurationSource y) {
-				return y.Priority - x.Priority;
-			});
+			sources.Sort((x, y) => y.Priority - x.Priority);
 			Params = new Hashtable();
 			foreach (var source in sources) {
-				Hashtable ht;
-				try {
-					ht = source.Read();
-				} catch(Exception exc){
-					throw new Exception("Config read failed.", exc);
-				}
+				Hashtable ht = source.Read();
 				foreach (DictionaryEntry de in ht)
 					if (!Params.ContainsKey(de.Key))
 						Params.Add(de.Key, de.Value);

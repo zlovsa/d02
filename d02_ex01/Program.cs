@@ -28,7 +28,13 @@ var sources = new List<IConfigurationSource>();
 sources.Add(yamlSrc);
 sources.Add(jsonSrc);
 
-var config = new Configuration(sources);
+Configuration config=null;
+try {
+	config = new Configuration(sources);
+} catch {
+	Console.WriteLine("Invalid data. Check your input and try again.");
+	return;
+}
 
 Console.WriteLine("Configuration");
 foreach (DictionaryEntry d in config.Params)
